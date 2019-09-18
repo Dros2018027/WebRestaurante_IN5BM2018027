@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="OrdenesCreateDlg" widgetVar="OrdenesCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateOrdenesTitle}">
+            <h:form id="OrdenesCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{ordenesController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateOrdenesLabel_idorden}" for="idorden" />
+                        <p:inputText id="idorden" value="#{ordenesController.selected.idorden}" title="#{bundle.CreateOrdenesTitle_idorden}" required="true" requiredMessage="#{bundle.CreateOrdenesRequiredMessage_idorden}"/>
+                        <p:outputLabel value="#{bundle.CreateOrdenesLabel_platoCosto}" for="platoCosto" />
+                        <p:inputText id="platoCosto" value="#{ordenesController.selected.platoCosto}" title="#{bundle.CreateOrdenesTitle_platoCosto}" required="true" requiredMessage="#{bundle.CreateOrdenesRequiredMessage_platoCosto}"/>
+                        <p:outputLabel value="#{bundle.CreateOrdenesLabel_cantidadplatos}" for="cantidadplatos" />
+                        <p:inputText id="cantidadplatos" value="#{ordenesController.selected.cantidadplatos}" title="#{bundle.CreateOrdenesTitle_cantidadplatos}" required="true" requiredMessage="#{bundle.CreateOrdenesRequiredMessage_cantidadplatos}"/>
+                        <p:outputLabel value="#{bundle.CreateOrdenesLabel_descripcion}" for="descripcion" />
+                        <p:inputText id="descripcion" value="#{ordenesController.selected.descripcion}" title="#{bundle.CreateOrdenesTitle_descripcion}" required="true" requiredMessage="#{bundle.CreateOrdenesRequiredMessage_descripcion}"/>
+                        <p:outputLabel value="#{bundle.CreateOrdenesLabel_totalventa}" for="totalventa" />
+                        <p:inputText id="totalventa" value="#{ordenesController.selected.totalventa}" title="#{bundle.CreateOrdenesTitle_totalventa}" />
+                        <p:outputLabel value="#{bundle.CreateOrdenesLabel_idmesa}" for="idmesa" />
+                        <p:selectOneMenu id="idmesa" value="#{ordenesController.selected.idmesa}" required="true" requiredMessage="#{bundle.EditOrdenesRequiredMessage_idmesa}">
+                            <f:selectItems value="#{mesasController.itemsAvailableSelectOne}"
+                                           var="idmesaItem"
+                                           itemValue="#{idmesaItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateOrdenesLabel_idplato}" for="idplato" />
+                        <p:selectOneMenu id="idplato" value="#{ordenesController.selected.idplato}" required="true" requiredMessage="#{bundle.EditOrdenesRequiredMessage_idplato}">
+                            <f:selectItems value="#{platosController.itemsAvailableSelectOne}"
+                                           var="idplatoItem"
+                                           itemValue="#{idplatoItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{ordenesController.create}" value="#{bundle.Save}" update="display,:OrdenesListForm:datalist,:growl" oncomplete="handleSubmit(args,'OrdenesCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="OrdenesCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

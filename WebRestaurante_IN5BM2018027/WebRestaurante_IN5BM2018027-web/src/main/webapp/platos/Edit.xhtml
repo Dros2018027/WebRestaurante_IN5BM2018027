@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PlatosEditDlg" widgetVar="PlatosEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditPlatosTitle}">
+            <h:form id="PlatosEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{platosController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditPlatosLabel_idplato}" for="idplato" />
+                        <p:inputText id="idplato" value="#{platosController.selected.idplato}" title="#{bundle.EditPlatosTitle_idplato}" required="true" requiredMessage="#{bundle.EditPlatosRequiredMessage_idplato}"/>
+                        <p:outputLabel value="#{bundle.EditPlatosLabel_plato}" for="plato" />
+                        <p:inputText id="plato" value="#{platosController.selected.plato}" title="#{bundle.EditPlatosTitle_plato}" required="true" requiredMessage="#{bundle.EditPlatosRequiredMessage_plato}"/>
+                        <p:outputLabel value="#{bundle.EditPlatosLabel_costo}" for="costo" />
+                        <p:inputText id="costo" value="#{platosController.selected.costo}" title="#{bundle.EditPlatosTitle_costo}" required="true" requiredMessage="#{bundle.EditPlatosRequiredMessage_costo}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{platosController.update}" value="#{bundle.Save}" update="display,:PlatosListForm:datalist,:growl" oncomplete="handleSubmit(args, 'PlatosEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PlatosEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

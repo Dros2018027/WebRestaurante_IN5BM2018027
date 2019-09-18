@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ClientesViewDlg" widgetVar="ClientesViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewClientesTitle}">
+            <h:form id="ClientesViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{clientesController.selected != null}">
+                        <h:outputText value="#{bundle.ViewClientesLabel_idcliente}"/>
+                        <h:outputText value="#{clientesController.selected.idcliente}" title="#{bundle.ViewClientesTitle_idcliente}"/>
+                        <h:outputText value="#{bundle.ViewClientesLabel_nombres}"/>
+                        <h:outputText value="#{clientesController.selected.nombres}" title="#{bundle.ViewClientesTitle_nombres}"/>
+                        <h:outputText value="#{bundle.ViewClientesLabel_apellidos}"/>
+                        <h:outputText value="#{clientesController.selected.apellidos}" title="#{bundle.ViewClientesTitle_apellidos}"/>
+                        <h:outputText value="#{bundle.ViewClientesLabel_dpi}"/>
+                        <h:outputText value="#{clientesController.selected.dpi}" title="#{bundle.ViewClientesTitle_dpi}"/>
+                        <h:outputText value="#{bundle.ViewClientesLabel_edad}"/>
+                        <h:outputText value="#{clientesController.selected.edad}" title="#{bundle.ViewClientesTitle_edad}"/>
+                        <h:outputText value="#{bundle.ViewClientesLabel_fechanacimiento}"/>
+                        <h:outputText value="#{clientesController.selected.fechanacimiento}" title="#{bundle.ViewClientesTitle_fechanacimiento}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="ClientesViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

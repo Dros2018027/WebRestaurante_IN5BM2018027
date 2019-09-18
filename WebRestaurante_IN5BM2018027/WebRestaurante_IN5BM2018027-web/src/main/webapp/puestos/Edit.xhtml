@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PuestosEditDlg" widgetVar="PuestosEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditPuestosTitle}">
+            <h:form id="PuestosEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{puestosController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditPuestosLabel_idpuesto}" for="idpuesto" />
+                        <p:inputText id="idpuesto" value="#{puestosController.selected.idpuesto}" title="#{bundle.EditPuestosTitle_idpuesto}" required="true" requiredMessage="#{bundle.EditPuestosRequiredMessage_idpuesto}"/>
+                        <p:outputLabel value="#{bundle.EditPuestosLabel_puesto}" for="puesto" />
+                        <p:inputText id="puesto" value="#{puestosController.selected.puesto}" title="#{bundle.EditPuestosTitle_puesto}" required="true" requiredMessage="#{bundle.EditPuestosRequiredMessage_puesto}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{puestosController.update}" value="#{bundle.Save}" update="display,:PuestosListForm:datalist,:growl" oncomplete="handleSubmit(args, 'PuestosEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PuestosEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

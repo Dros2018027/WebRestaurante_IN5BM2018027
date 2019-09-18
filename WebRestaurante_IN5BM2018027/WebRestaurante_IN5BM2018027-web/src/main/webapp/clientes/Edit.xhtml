@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ClientesEditDlg" widgetVar="ClientesEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditClientesTitle}">
+            <h:form id="ClientesEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{clientesController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditClientesLabel_idcliente}" for="idcliente" />
+                        <p:inputText id="idcliente" value="#{clientesController.selected.idcliente}" title="#{bundle.EditClientesTitle_idcliente}" required="true" requiredMessage="#{bundle.EditClientesRequiredMessage_idcliente}"/>
+                        <p:outputLabel value="#{bundle.EditClientesLabel_nombres}" for="nombres" />
+                        <p:inputText id="nombres" value="#{clientesController.selected.nombres}" title="#{bundle.EditClientesTitle_nombres}" required="true" requiredMessage="#{bundle.EditClientesRequiredMessage_nombres}"/>
+                        <p:outputLabel value="#{bundle.EditClientesLabel_apellidos}" for="apellidos" />
+                        <p:inputText id="apellidos" value="#{clientesController.selected.apellidos}" title="#{bundle.EditClientesTitle_apellidos}" required="true" requiredMessage="#{bundle.EditClientesRequiredMessage_apellidos}"/>
+                        <p:outputLabel value="#{bundle.EditClientesLabel_dpi}" for="dpi" />
+                        <p:inputText id="dpi" value="#{clientesController.selected.dpi}" title="#{bundle.EditClientesTitle_dpi}" required="true" requiredMessage="#{bundle.EditClientesRequiredMessage_dpi}"/>
+                        <p:outputLabel value="#{bundle.EditClientesLabel_edad}" for="edad" />
+                        <p:inputText id="edad" value="#{clientesController.selected.edad}" title="#{bundle.EditClientesTitle_edad}" required="true" requiredMessage="#{bundle.EditClientesRequiredMessage_edad}"/>
+                        <p:outputLabel value="#{bundle.EditClientesLabel_fechanacimiento}" for="fechanacimiento" />
+                        <p:calendar id="fechanacimiento" pattern="MM/dd/yyyy" value="#{clientesController.selected.fechanacimiento}" title="#{bundle.EditClientesTitle_fechanacimiento}" required="true" requiredMessage="#{bundle.EditClientesRequiredMessage_fechanacimiento}" showOn="button"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{clientesController.update}" value="#{bundle.Save}" update="display,:ClientesListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ClientesEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ClientesEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PuestosCreateDlg" widgetVar="PuestosCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreatePuestosTitle}">
+            <h:form id="PuestosCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{puestosController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreatePuestosLabel_idpuesto}" for="idpuesto" />
+                        <p:inputText id="idpuesto" value="#{puestosController.selected.idpuesto}" title="#{bundle.CreatePuestosTitle_idpuesto}" required="true" requiredMessage="#{bundle.CreatePuestosRequiredMessage_idpuesto}"/>
+                        <p:outputLabel value="#{bundle.CreatePuestosLabel_puesto}" for="puesto" />
+                        <p:inputText id="puesto" value="#{puestosController.selected.puesto}" title="#{bundle.CreatePuestosTitle_puesto}" required="true" requiredMessage="#{bundle.CreatePuestosRequiredMessage_puesto}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{puestosController.create}" value="#{bundle.Save}" update="display,:PuestosListForm:datalist,:growl" oncomplete="handleSubmit(args,'PuestosCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PuestosCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

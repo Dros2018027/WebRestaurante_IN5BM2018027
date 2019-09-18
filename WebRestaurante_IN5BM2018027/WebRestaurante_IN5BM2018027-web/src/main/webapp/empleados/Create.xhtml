@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="EmpleadosCreateDlg" widgetVar="EmpleadosCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateEmpleadosTitle}">
+            <h:form id="EmpleadosCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{empleadosController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateEmpleadosLabel_idempleado}" for="idempleado" />
+                        <p:inputText id="idempleado" value="#{empleadosController.selected.idempleado}" title="#{bundle.CreateEmpleadosTitle_idempleado}" required="true" requiredMessage="#{bundle.CreateEmpleadosRequiredMessage_idempleado}"/>
+                        <p:outputLabel value="#{bundle.CreateEmpleadosLabel_nombres}" for="nombres" />
+                        <p:inputText id="nombres" value="#{empleadosController.selected.nombres}" title="#{bundle.CreateEmpleadosTitle_nombres}" required="true" requiredMessage="#{bundle.CreateEmpleadosRequiredMessage_nombres}"/>
+                        <p:outputLabel value="#{bundle.CreateEmpleadosLabel_apellidos}" for="apellidos" />
+                        <p:inputText id="apellidos" value="#{empleadosController.selected.apellidos}" title="#{bundle.CreateEmpleadosTitle_apellidos}" required="true" requiredMessage="#{bundle.CreateEmpleadosRequiredMessage_apellidos}"/>
+                        <p:outputLabel value="#{bundle.CreateEmpleadosLabel_idpuesto}" for="idpuesto" />
+                        <p:selectOneMenu id="idpuesto" value="#{empleadosController.selected.idpuesto}" required="true" requiredMessage="#{bundle.EditEmpleadosRequiredMessage_idpuesto}">
+                            <f:selectItems value="#{puestosController.itemsAvailableSelectOne}"
+                                           var="idpuestoItem"
+                                           itemValue="#{idpuestoItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{empleadosController.create}" value="#{bundle.Save}" update="display,:EmpleadosListForm:datalist,:growl" oncomplete="handleSubmit(args,'EmpleadosCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="EmpleadosCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
